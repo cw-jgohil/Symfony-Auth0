@@ -1,0 +1,25 @@
+<div class="nav-bar__container">
+    <nav class="nav-bar">
+        <div class="nav-bar__brand"></div>
+        <div class="nav-bar__tabs">
+
+            <a href="{{ path('public_message') }}" class="nav-bar__tab">
+                Public
+            </a>
+            {% if (app.user != null) %}
+                <a href="{{ path('protected_message') }}" class="nav-bar__tab">
+                    Protected
+                </a>
+                <a href="{{ path('admin_message') }}" class="nav-bar__tab">
+                    Admin
+                </a>
+                <a href="{{ path('profile') }}" class="nav-bar__tab">
+                    Profile
+                </a>
+            {% endif %}
+        </div>
+        <div class="nav-bar__buttons">
+            {{ include('components/authentication-button.html.twig' ) }}
+        </div>
+    </nav>
+</div>

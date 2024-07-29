@@ -1,0 +1,26 @@
+security:
+    providers:
+        auth0:
+            id: App\OAuth2\Auth0UserProvider
+    enable_authenticator_manager: true
+    firewalls:
+        main:
+            provider: auth0
+            oauth:
+                resource_owners:
+                    auth0: "/callback"
+                login_path: login
+                use_forward: false
+                failure_path: /login
+                default_target_path: profile
+                oauth_user_provider:
+                    service: App\OAuth2\Auth0UserProvider
+            logout:
+                path: logout
+                target: /
+            form_login:
+                login_path: login
+
+    access_control:
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/(profile|protected|admin|logout)$, roles: ROLE_USER }
